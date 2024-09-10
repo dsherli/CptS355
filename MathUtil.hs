@@ -82,3 +82,18 @@ myReverse (x : xs) = myReverse xs ++ [x]
 myTake _ [] = []
 myTake 0 _ = []
 myTake n (x : xs) = x : myTake (n - 1) xs
+
+reverse' [] = []
+reverse' (x : xs) = reverse' xs ++ [x]
+
+take' _ [] = []
+take' 0 _ = []
+take' n (x : xs) = x : take' (n - 1) xs
+
+splitByConditionHelper [] _ res = res
+splitByConditionHelper (x : xs) c (leftList, rightList) =
+  if c x
+    then splitByConditionHelper xs c (leftList ++ [x], rightList)
+    else splitByConditionHelper xs c (leftList, rightList ++ [x])
+
+splitByCondition xs c = splitByConditionHelper xs c ([], [])
